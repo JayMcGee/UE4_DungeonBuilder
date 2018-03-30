@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+	<ItemGroup>
+		<None Include="..\..\DungeonBuilder.uproject" />
+		<Filter Include="Source">
+			<UniqueIdentifier>{13F0F816-8F65-4345-9794-2D5326A081FF}</UniqueIdentifier>
+		</Filter>
+		<None Include="..\..\Source\DungeonBuilder.Target.cs">
+			<Filter>Source</Filter>
+		</None >
+		<None Include="..\..\Source\DungeonBuilderEditor.Target.cs">
+			<Filter>Source</Filter>
+		</None >
+		<Filter Include="Config">
+			<UniqueIdentifier>{DE74C30F-8276-49BB-9772-1FF4B5B7891B}</UniqueIdentifier>
+		</Filter>
+		<None Include="..\..\Config\DefaultEditor.ini">
+			<Filter>Config</Filter>
+		</None >
+		<None Include="..\..\Config\DefaultEditorPerProjectUserSettings.ini">
+			<Filter>Config</Filter>
+		</None >
+		<None Include="..\..\Config\DefaultEngine.ini">
+			<Filter>Config</Filter>
+		</None >
+		<None Include="..\..\Config\DefaultGame.ini">
+			<Filter>Config</Filter>
+		</None >
+		<None Include="..\..\Config\DefaultInput.ini">
+			<Filter>Config</Filter>
+		</None >
+		<Filter Include="Source\DungeonBuilder">
+			<UniqueIdentifier>{CF4C4821-D9B1-4AD0-AB24-101689AF8EF2}</UniqueIdentifier>
+		</Filter>
+		<None Include="..\..\Source\DungeonBuilder\DungeonBuilder.Build.cs">
+			<Filter>Source\DungeonBuilder</Filter>
+		</None >
+		<ClCompile Include="..\..\Source\DungeonBuilder\DungeonBuilder.cpp">
+			<Filter>Source\DungeonBuilder</Filter>
+		</ClCompile >
+		<ClInclude Include="..\..\Source\DungeonBuilder\DungeonBuilder.h">
+			<Filter>Source\DungeonBuilder</Filter>
+		</ClInclude >
+		<ClCompile Include="..\..\Source\DungeonBuilder\DungeonBuilderCharacter.cpp">
+			<Filter>Source\DungeonBuilder</Filter>
+		</ClCompile >
+		<ClInclude Include="..\..\Source\DungeonBuilder\DungeonBuilderCharacter.h">
+			<Filter>Source\DungeonBuilder</Filter>
+		</ClInclude >
+		<ClCompile Include="..\..\Source\DungeonBuilder\DungeonBuilderGameMode.cpp">
+			<Filter>Source\DungeonBuilder</Filter>
+		</ClCompile >
+		<ClInclude Include="..\..\Source\DungeonBuilder\DungeonBuilderGameMode.h">
+			<Filter>Source\DungeonBuilder</Filter>
+		</ClInclude >
+		<ClCompile Include="..\..\Source\DungeonBuilder\DungeonBuilderPlayerController.cpp">
+			<Filter>Source\DungeonBuilder</Filter>
+		</ClCompile >
+		<ClInclude Include="..\..\Source\DungeonBuilder\DungeonBuilderPlayerController.h">
+			<Filter>Source\DungeonBuilder</Filter>
+		</ClInclude >
+	</ItemGroup>
+</Project>
