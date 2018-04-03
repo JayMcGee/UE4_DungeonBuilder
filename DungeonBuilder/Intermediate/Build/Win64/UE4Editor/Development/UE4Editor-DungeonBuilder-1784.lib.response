@@ -1,0 +1,22 @@
+/NOLOGO
+/errorReport:prompt
+/MACHINE:x64
+/SUBSYSTEM:WINDOWS
+/DEF
+/NAME:"UE4Editor-DungeonBuilder-1784.dll"
+/IGNORE:4221
+/NODEFAULTLIB
+"E:\Program Files\UE_4.19\Engine\Intermediate\Build\Win64\UE4Editor\Development\Engine\SharedPCH.Engine.h.obj"
+"F:\UE4_DungeonBuilder\DungeonBuilder\Intermediate\Build\Win64\UE4Editor\Development\DungeonBuilder\DungeonBuilder.cpp.obj"
+"F:\UE4_DungeonBuilder\DungeonBuilder\Intermediate\Build\Win64\UE4Editor\Development\DungeonBuilder\DungeonBuilderCharacter.cpp.obj"
+"F:\UE4_DungeonBuilder\DungeonBuilder\Intermediate\Build\Win64\UE4Editor\Development\DungeonBuilder\DungeonBuilderGameMode.cpp.obj"
+"F:\UE4_DungeonBuilder\DungeonBuilder\Intermediate\Build\Win64\UE4Editor\Development\DungeonBuilder\DungeonBuilderPlayerController.cpp.obj"
+"F:\UE4_DungeonBuilder\DungeonBuilder\Intermediate\Build\Win64\UE4Editor\Development\DungeonBuilder\DungeonGenerator.cpp.obj"
+"F:\UE4_DungeonBuilder\DungeonBuilder\Intermediate\Build\Win64\UE4Editor\Development\DungeonBuilder\DungeonBuilder.init.gen.cpp.obj"
+"F:\UE4_DungeonBuilder\DungeonBuilder\Intermediate\Build\Win64\UE4Editor\Development\DungeonBuilder\DungeonBuilderCharacter.gen.cpp.obj"
+"F:\UE4_DungeonBuilder\DungeonBuilder\Intermediate\Build\Win64\UE4Editor\Development\DungeonBuilder\DungeonBuilderGameMode.gen.cpp.obj"
+"F:\UE4_DungeonBuilder\DungeonBuilder\Intermediate\Build\Win64\UE4Editor\Development\DungeonBuilder\DungeonBuilderPlayerController.gen.cpp.obj"
+"F:\UE4_DungeonBuilder\DungeonBuilder\Intermediate\Build\Win64\UE4Editor\Development\DungeonBuilder\DungeonGenerator.gen.cpp.obj"
+"E:\Program Files\UE_4.19\Engine\Intermediate\Build\Win64\UE4Editor\Development\DungeonBuilder\PCLaunch.rc.res"
+"E:\Program Files\UE_4.19\Engine\Intermediate\Build\Win64\UE4Editor\Development\ModuleVersionResource.rc.inl.res"
+/OUT:"F:\UE4_DungeonBuilder\DungeonBuilder\Intermediate\Build\Win64\UE4Editor\Development\UE4Editor-DungeonBuilder-1784.lib"

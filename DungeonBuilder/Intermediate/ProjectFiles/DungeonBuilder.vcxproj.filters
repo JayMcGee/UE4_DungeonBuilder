@@ -4,7 +4,7 @@
 	<ItemGroup>
 		<None Include="..\..\DungeonBuilder.uproject" />
 		<Filter Include="Source">
-			<UniqueIdentifier>{13F0F816-8F65-4345-9794-2D5326A081FF}</UniqueIdentifier>
+			<UniqueIdentifier>{D41C38C5-3DEC-48C9-AB53-24A0AE521D29}</UniqueIdentifier>
 		</Filter>
 		<None Include="..\..\Source\DungeonBuilder.Target.cs">
 			<Filter>Source</Filter>
@@ -13,7 +13,7 @@
 			<Filter>Source</Filter>
 		</None >
 		<Filter Include="Config">
-			<UniqueIdentifier>{DE74C30F-8276-49BB-9772-1FF4B5B7891B}</UniqueIdentifier>
+			<UniqueIdentifier>{D0EE1DDF-9E3D-4CA9-9F7D-87CA42D99973}</UniqueIdentifier>
 		</Filter>
 		<None Include="..\..\Config\DefaultEditor.ini">
 			<Filter>Config</Filter>
@@ -31,7 +31,7 @@
 			<Filter>Config</Filter>
 		</None >
 		<Filter Include="Source\DungeonBuilder">
-			<UniqueIdentifier>{CF4C4821-D9B1-4AD0-AB24-101689AF8EF2}</UniqueIdentifier>
+			<UniqueIdentifier>{5540B66A-6C0A-4031-890C-56581F090DE3}</UniqueIdentifier>
 		</Filter>
 		<None Include="..\..\Source\DungeonBuilder\DungeonBuilder.Build.cs">
 			<Filter>Source\DungeonBuilder</Filter>
@@ -58,6 +58,12 @@
 			<Filter>Source\DungeonBuilder</Filter>
 		</ClCompile >
 		<ClInclude Include="..\..\Source\DungeonBuilder\DungeonBuilderPlayerController.h">
+			<Filter>Source\DungeonBuilder</Filter>
+		</ClInclude >
+		<ClCompile Include="..\..\Source\DungeonBuilder\DungeonGenerator.cpp">
+			<Filter>Source\DungeonBuilder</Filter>
+		</ClCompile >
+		<ClInclude Include="..\..\Source\DungeonBuilder\DungeonGenerator.h">
 			<Filter>Source\DungeonBuilder</Filter>
 		</ClInclude >
 	</ItemGroup>

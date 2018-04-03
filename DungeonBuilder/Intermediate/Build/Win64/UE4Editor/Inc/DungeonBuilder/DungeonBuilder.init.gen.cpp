@@ -19,8 +19,8 @@ void EmptyLinkFunctionForGeneratedCodeDungeonBuilder_init() {}
 			static const UE4CodeGen_Private::FPackageParams PackageParams = {
 				"/Script/DungeonBuilder",
 				PKG_CompiledIn | 0x00000000,
-				0x9E023967,
-				0x9F0F60CC,
+				0x30A72EAF,
+				0xD355A330,
 				nullptr, 0,
 				METADATA_PARAMS(nullptr, 0)
 			};

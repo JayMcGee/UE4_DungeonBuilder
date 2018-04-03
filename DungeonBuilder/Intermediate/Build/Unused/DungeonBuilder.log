@@ -1,0 +1,13 @@
+﻿  Using 'git status' to determine working set for adaptive non-unity build.
+  Creating makefile for DungeonBuilderEditor (no existing makefile)
+  Deleting old hot reload file: "F:\UE4_DungeonBuilder\DungeonBuilder\Binaries\Win64\UE4Editor-DungeonBuilder-4325.dll".
+  Deleting old hot reload file: "F:\UE4_DungeonBuilder\DungeonBuilder\Binaries\Win64\UE4Editor-DungeonBuilder-4325.pdb".
+  Deleting old hot reload file: "F:\UE4_DungeonBuilder\DungeonBuilder\Binaries\Win64\UE4Editor-DungeonBuilder-7838.dll".
+  Deleting old hot reload file: "F:\UE4_DungeonBuilder\DungeonBuilder\Binaries\Win64\UE4Editor-DungeonBuilder-7838.pdb".
+  Deleting old hot reload file: "F:\UE4_DungeonBuilder\DungeonBuilder\Binaries\Win64\UE4Editor-DungeonBuilder-8693.dll".
+  Deleting old hot reload file: "F:\UE4_DungeonBuilder\DungeonBuilder\Binaries\Win64\UE4Editor-DungeonBuilder-8693.pdb".
+  Performing 1 actions (4 in parallel)
+  [1/1] Link UE4Editor-DungeonBuilder.dll
+     Creating library F:\UE4_DungeonBuilder\DungeonBuilder\Intermediate\Build\Win64\UE4Editor\Development\UE4Editor-DungeonBuilder.suppressed.lib and object F:\UE4_DungeonBuilder\DungeonBuilder\Intermediate\Build\Win64\UE4Editor\Development\UE4Editor-DungeonBuilder.suppressed.exp
+  Deploying DungeonBuilderEditor Win64 Development...
+  Total build time: 6.19 seconds (Local executor: 0.83 seconds)
