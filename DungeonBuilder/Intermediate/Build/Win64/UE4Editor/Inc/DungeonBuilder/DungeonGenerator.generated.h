@@ -13,9 +13,14 @@ PRAGMA_DISABLE_DEPRECATION_WARNINGS
 #endif
 #define DUNGEONBUILDER_DungeonGenerator_generated_h
 
-#define DungeonBuilder_Source_DungeonBuilder_DungeonGenerator_h_12_RPC_WRAPPERS
-#define DungeonBuilder_Source_DungeonBuilder_DungeonGenerator_h_12_RPC_WRAPPERS_NO_PURE_DECLS
-#define DungeonBuilder_Source_DungeonBuilder_DungeonGenerator_h_12_INCLASS_NO_PURE_DECLS \
+#define DungeonBuilder_Source_DungeonBuilder_DungeonGenerator_h_12_GENERATED_BODY \
+	friend DUNGEONBUILDER_API class UScriptStruct* Z_Construct_UScriptStruct_FRoom(); \
+	DUNGEONBUILDER_API static class UScriptStruct* StaticStruct();
+
+
+#define DungeonBuilder_Source_DungeonBuilder_DungeonGenerator_h_33_RPC_WRAPPERS
+#define DungeonBuilder_Source_DungeonBuilder_DungeonGenerator_h_33_RPC_WRAPPERS_NO_PURE_DECLS
+#define DungeonBuilder_Source_DungeonBuilder_DungeonGenerator_h_33_INCLASS_NO_PURE_DECLS \
 private: \
 	static void StaticRegisterNativesADungeonGenerator(); \
 	friend DUNGEONBUILDER_API class UClass* Z_Construct_UClass_ADungeonGenerator(); \
@@ -25,7 +30,7 @@ public: \
 	enum {IsIntrinsic=COMPILED_IN_INTRINSIC};
 
 
-#define DungeonBuilder_Source_DungeonBuilder_DungeonGenerator_h_12_INCLASS \
+#define DungeonBuilder_Source_DungeonBuilder_DungeonGenerator_h_33_INCLASS \
 private: \
 	static void StaticRegisterNativesADungeonGenerator(); \
 	friend DUNGEONBUILDER_API class UClass* Z_Construct_UClass_ADungeonGenerator(); \
@@ -35,7 +40,7 @@ public: \
 	enum {IsIntrinsic=COMPILED_IN_INTRINSIC};
 
 
-#define DungeonBuilder_Source_DungeonBuilder_DungeonGenerator_h_12_STANDARD_CONSTRUCTORS \
+#define DungeonBuilder_Source_DungeonBuilder_DungeonGenerator_h_33_STANDARD_CONSTRUCTORS \
 	/** Standard constructor, called after all reflected properties have been initialized */ \
 	NO_API ADungeonGenerator(const FObjectInitializer& ObjectInitializer); \
 	DEFINE_DEFAULT_OBJECT_INITIALIZER_CONSTRUCTOR_CALL(ADungeonGenerator) \
@@ -48,7 +53,7 @@ private: \
 public:
 
 
-#define DungeonBuilder_Source_DungeonBuilder_DungeonGenerator_h_12_ENHANCED_CONSTRUCTORS \
+#define DungeonBuilder_Source_DungeonBuilder_DungeonGenerator_h_33_ENHANCED_CONSTRUCTORS \
 private: \
 	/** Private move- and copy-constructors, should never be used */ \
 	NO_API ADungeonGenerator(ADungeonGenerator&&); \
@@ -59,26 +64,26 @@ DEFINE_VTABLE_PTR_HELPER_CTOR_CALLER(ADungeonGenerator); \
 	DEFINE_DEFAULT_CONSTRUCTOR_CALL(ADungeonGenerator)
 
 
-#define DungeonBuilder_Source_DungeonBuilder_DungeonGenerator_h_12_PRIVATE_PROPERTY_OFFSET
-#define DungeonBuilder_Source_DungeonBuilder_DungeonGenerator_h_9_PROLOG
-#define DungeonBuilder_Source_DungeonBuilder_DungeonGenerator_h_12_GENERATED_BODY_LEGACY \
+#define DungeonBuilder_Source_DungeonBuilder_DungeonGenerator_h_33_PRIVATE_PROPERTY_OFFSET
+#define DungeonBuilder_Source_DungeonBuilder_DungeonGenerator_h_30_PROLOG
+#define DungeonBuilder_Source_DungeonBuilder_DungeonGenerator_h_33_GENERATED_BODY_LEGACY \
 PRAGMA_DISABLE_DEPRECATION_WARNINGS \
 public: \
-	DungeonBuilder_Source_DungeonBuilder_DungeonGenerator_h_12_PRIVATE_PROPERTY_OFFSET \
-	DungeonBuilder_Source_DungeonBuilder_DungeonGenerator_h_12_RPC_WRAPPERS \
-	DungeonBuilder_Source_DungeonBuilder_DungeonGenerator_h_12_INCLASS \
-	DungeonBuilder_Source_DungeonBuilder_DungeonGenerator_h_12_STANDARD_CONSTRUCTORS \
+	DungeonBuilder_Source_DungeonBuilder_DungeonGenerator_h_33_PRIVATE_PROPERTY_OFFSET \
+	DungeonBuilder_Source_DungeonBuilder_DungeonGenerator_h_33_RPC_WRAPPERS \
+	DungeonBuilder_Source_DungeonBuilder_DungeonGenerator_h_33_INCLASS \
+	DungeonBuilder_Source_DungeonBuilder_DungeonGenerator_h_33_STANDARD_CONSTRUCTORS \
 public: \
 PRAGMA_ENABLE_DEPRECATION_WARNINGS
 
 
-#define DungeonBuilder_Source_DungeonBuilder_DungeonGenerator_h_12_GENERATED_BODY \
+#define DungeonBuilder_Source_DungeonBuilder_DungeonGenerator_h_33_GENERATED_BODY \
 PRAGMA_DISABLE_DEPRECATION_WARNINGS \
 public: \
-	DungeonBuilder_Source_DungeonBuilder_DungeonGenerator_h_12_PRIVATE_PROPERTY_OFFSET \
-	DungeonBuilder_Source_DungeonBuilder_DungeonGenerator_h_12_RPC_WRAPPERS_NO_PURE_DECLS \
-	DungeonBuilder_Source_DungeonBuilder_DungeonGenerator_h_12_INCLASS_NO_PURE_DECLS \
-	DungeonBuilder_Source_DungeonBuilder_DungeonGenerator_h_12_ENHANCED_CONSTRUCTORS \
+	DungeonBuilder_Source_DungeonBuilder_DungeonGenerator_h_33_PRIVATE_PROPERTY_OFFSET \
+	DungeonBuilder_Source_DungeonBuilder_DungeonGenerator_h_33_RPC_WRAPPERS_NO_PURE_DECLS \
+	DungeonBuilder_Source_DungeonBuilder_DungeonGenerator_h_33_INCLASS_NO_PURE_DECLS \
+	DungeonBuilder_Source_DungeonBuilder_DungeonGenerator_h_33_ENHANCED_CONSTRUCTORS \
 private: \
 PRAGMA_ENABLE_DEPRECATION_WARNINGS
 

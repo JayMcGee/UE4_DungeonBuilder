@@ -6,6 +6,27 @@
 #include "GameFramework/Actor.h"
 #include "DungeonGenerator.generated.h"
 
+USTRUCT()
+struct FRoom 
+{
+	GENERATED_BODY()
+	
+	UPROPERTY()
+	FGuid RoomId;
+
+	UPROPERTY()
+	FVector2D Coordinates = FVector2D::ZeroVector;
+
+	UPROPERTY()
+	float RoomLength = 0.f;
+
+	UPROPERTY()
+	float RoomWidth = 0.f;
+
+	UPROPERTY()
+	bool bIsMain = false;
+};
+
 UCLASS()
 class DUNGEONBUILDER_API ADungeonGenerator : public AActor
 {
@@ -47,11 +68,20 @@ public:
 	UPROPERTY(EditAnywhere, Category = "Dungeon Generator")
 	float MaximumRoomLength = 250.f;
 
+	/* The Maximum Length of a room */
+	UPROPERTY(EditAnywhere, Category = "Dungeon Generator")
+	float GeneratorGridSize = 0.5f;
+
+
 private:
 
 	FVector2D GetRandomPointInCircle();
 
+	//------------------------ Utils
+	float RoundFloatToGrid( float InRawFloat, float GridSize );
+	FVector2D RoundCoordinatesToGrid( FVector2D InRawCoord, float GridSize );
+
 private:
-	TArray<FVector2D> ArrayOfRandomPointsInsideACircle;
+	TArray<FRoom> ArrayOfRandomRooms;
 	
 };

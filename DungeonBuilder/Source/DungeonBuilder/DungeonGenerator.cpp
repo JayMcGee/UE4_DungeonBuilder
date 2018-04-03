@@ -1,6 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "DungeonGenerator.h"
+#include "DrawDebugHelpers.h"
 
 namespace DungeonGeneratorConstant
 {
@@ -23,8 +24,22 @@ void ADungeonGenerator::BeginPlay()
 
 	for (int32 idx = 0; idx < NumberOfRooms; idx++)
 	{
-		FVector2D RandomCoordinate = GetRandomPointInCircle();
-		ArrayOfRandomPointsInsideACircle.Add(RandomCoordinate);
+		FRoom RandomRoom;
+		FVector2D RandomCoordinates = GetRandomPointInCircle();
+		
+		RandomRoom.RoomId = FGuid::NewGuid();
+		RandomRoom.Coordinates = RandomCoordinates;
+		RandomRoom.RoomWidth = RoundFloatToGrid(FMath::FRandRange(MinimumRoomWidth, MaximumRoomWidth), GeneratorGridSize);
+		RandomRoom.RoomLength = RoundFloatToGrid(FMath::FRandRange(MinimumRoomLength, MaximumRoomLength), GeneratorGridSize);
+
+		ArrayOfRandomRooms.Add(RandomRoom);
+	}
+
+	//// Test Only : Spawn shapes to test
+	DrawDebugCircle(GetWorld(), FVector::ZeroVector, GeneratorCircleRadius, 50, FColor::Red, true,-1,0,4,FVector(1,0,0),FVector(0,1,0),false);
+	for (FRoom Room : ArrayOfRandomRooms)
+	{
+		DrawDebugPoint(GetWorld(), FVector(Room.Coordinates.X, Room.Coordinates.Y, 0), 5.f, FColor::Green, true);
 	}
 }
 
@@ -32,7 +47,6 @@ void ADungeonGenerator::BeginPlay()
 void ADungeonGenerator::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
 }
 
 FVector2D ADungeonGenerator::GetRandomPointInCircle()
@@ -43,7 +57,21 @@ FVector2D ADungeonGenerator::GetRandomPointInCircle()
 
 	const float X = GeneratorCircleRadius * RandomInverseNumber * FMath::Cos(RandomRadius);
 	const float Y = GeneratorCircleRadius * RandomInverseNumber * FMath::Sin(RandomRadius);
+	
+	return RoundCoordinatesToGrid(FVector2D(X, Y), GeneratorGridSize);
+}
 
-	return FVector2D(X, Y);
+float ADungeonGenerator::RoundFloatToGrid( float InRawFloat, float GridSize )
+{
+	return FMath::RoundHalfToZero(InRawFloat / GridSize) * GridSize;	
+}
+
+FVector2D ADungeonGenerator::RoundCoordinatesToGrid(FVector2D InRawCoord, float GridSize)
+{
+	FVector2D GridAlignedCoord;
+	GridAlignedCoord.X = RoundFloatToGrid(InRawCoord.X, GridSize);
+	GridAlignedCoord.Y = RoundFloatToGrid(InRawCoord.Y, GridSize);
+
+	return GridAlignedCoord;
 }
 
