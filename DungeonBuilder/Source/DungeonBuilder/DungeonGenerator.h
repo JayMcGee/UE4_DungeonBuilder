@@ -80,6 +80,7 @@ private:
 	//------------------------ Utils
 	float RoundFloatToGrid( float InRawFloat, float GridSize );
 	FVector2D RoundCoordinatesToGrid( FVector2D InRawCoord, float GridSize );
+	void CalculateMeanWidthAndLength(TArray<FRoom> const& ArrayOfRooms, float& OutWidthMean, float& OutLengthMean);
 
 private:
 	TArray<FRoom> ArrayOfRandomRooms;

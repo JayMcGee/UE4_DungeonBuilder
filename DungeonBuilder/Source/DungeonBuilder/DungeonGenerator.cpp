@@ -14,7 +14,6 @@ ADungeonGenerator::ADungeonGenerator()
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
-
 }
 
 // Called when the game starts or when spawned
@@ -25,10 +24,9 @@ void ADungeonGenerator::BeginPlay()
 	for (int32 idx = 0; idx < NumberOfRooms; idx++)
 	{
 		FRoom RandomRoom;
-		FVector2D RandomCoordinates = GetRandomPointInCircle();
-		
+
 		RandomRoom.RoomId = FGuid::NewGuid();
-		RandomRoom.Coordinates = RandomCoordinates;
+		RandomRoom.Coordinates = GetRandomPointInCircle();;
 		RandomRoom.RoomWidth = RoundFloatToGrid(FMath::FRandRange(MinimumRoomWidth, MaximumRoomWidth), GeneratorGridSize);
 		RandomRoom.RoomLength = RoundFloatToGrid(FMath::FRandRange(MinimumRoomLength, MaximumRoomLength), GeneratorGridSize);
 
@@ -40,6 +38,8 @@ void ADungeonGenerator::BeginPlay()
 	for (FRoom Room : ArrayOfRandomRooms)
 	{
 		DrawDebugPoint(GetWorld(), FVector(Room.Coordinates.X, Room.Coordinates.Y, 0), 5.f, FColor::Green, true);
+		FBox DebugBox = FBox::BuildAABB(FVector(Room.Coordinates.X, Room.Coordinates.Y, 0), FVector(Room.RoomWidth, Room.RoomLength, 0));
+		DrawDebugSolidBox(GetWorld(), DebugBox, FColor::Green, FTransform::Identity, true);
 	}
 }
 
@@ -73,5 +73,20 @@ FVector2D ADungeonGenerator::RoundCoordinatesToGrid(FVector2D InRawCoord, float 
 	GridAlignedCoord.Y = RoundFloatToGrid(InRawCoord.Y, GridSize);
 
 	return GridAlignedCoord;
+}
+
+void ADungeonGenerator::CalculateMeanWidthAndLength(TArray<FRoom> const& ArrayOfRooms, float& OutWidthMean, float& OutLengthMean)
+{
+	float WidthMean = 0;
+	float LengthMean = 0;
+
+	for (FRoom Room : ArrayOfRooms)
+	{
+		WidthMean += Room.RoomWidth;
+		LengthMean += Room.RoomLength;
+	}
+
+	OutWidthMean = WidthMean / ArrayOfRooms.Num();
+	OutLengthMean = LengthMean / ArrayOfRooms.Num();
 }
 
