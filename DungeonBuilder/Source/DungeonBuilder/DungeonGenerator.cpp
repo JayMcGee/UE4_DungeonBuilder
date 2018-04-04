@@ -5,6 +5,9 @@
 
 namespace DungeonGeneratorConstant
 {
+	static int32 GDebugGenerator = 0;
+	FAutoConsoleVariableRef CVarDungeonGeneratorVisualization(TEXT("DGen.DrawDebug"), GDebugGenerator, TEXT(" 0 = Disable, 1 = Enable"));
+
 	static const float Pi = 3.1415;
 }
 
@@ -33,7 +36,8 @@ void ADungeonGenerator::BeginPlay()
 		ArrayOfRandomRooms.Add(RandomRoom);
 	}
 
-	//// Test Only : Spawn shapes to test
+	//// Test Only : Spawn shapes to 
+#if !UE_BUILD_SHIPPING
 	DrawDebugCircle(GetWorld(), FVector::ZeroVector, GeneratorCircleRadius, 50, FColor::Red, true,-1,0,4,FVector(1,0,0),FVector(0,1,0),false);
 	for (FRoom Room : ArrayOfRandomRooms)
 	{
@@ -41,6 +45,7 @@ void ADungeonGenerator::BeginPlay()
 		FBox DebugBox = FBox::BuildAABB(FVector(Room.Coordinates.X, Room.Coordinates.Y, 0), FVector(Room.RoomWidth, Room.RoomLength, 0));
 		DrawDebugSolidBox(GetWorld(), DebugBox, FColor::Green, FTransform::Identity, true);
 	}
+#endif
 }
 
 // Called every frame
