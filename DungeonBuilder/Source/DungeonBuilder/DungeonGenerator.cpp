@@ -44,7 +44,8 @@ void ADungeonGenerator::BeginPlay()
 	for (FRoom Room : ArrayOfRandomRooms)
 	{
 		DrawDebugPoint(GetWorld(), FVector(Room.Coordinates.X, Room.Coordinates.Y, 0), 5.f, FColor::Green, true);
-		FBox DebugBox = FBox::BuildAABB(FVector(Room.Coordinates.X, Room.Coordinates.Y, 0), FVector(Room.RoomWidth, Room.RoomLength, 0));
+		// Building debug box by extent ( Diagonal from center to corner ) 
+		FBox DebugBox = FBox::BuildAABB(FVector(Room.Coordinates.X, Room.Coordinates.Y, 0), FVector(Room.RoomWidth /2, Room.RoomLength /2, 0));
 		DrawDebugSolidBox(GetWorld(), DebugBox, FColor::Green, FTransform::Identity, true);
 	}
 #endif
@@ -106,11 +107,14 @@ void ADungeonGenerator::SpawnRooms()
 			UWorld* World = GetWorld();
 			FVector RoomLocation = FVector(RoomDescription.Coordinates.X, RoomDescription.Coordinates.Y, 0);
 			FRotator RoomRotation = FRotator::ZeroRotator;
-			FVector RoomScale = FVector( RoomDescription.RoomWidth, RoomDescription.RoomLength,1);
+
+			FVector RoomScale = FVector( RoomDescription.RoomWidth / 100.f, RoomDescription.RoomLength / 100.f, 1);
+
 			FTransform RoomTransform = FTransform(RoomRotation, RoomLocation, RoomScale);
 			FActorSpawnParameters SpawnParams = FActorSpawnParameters();
 
 			AActor* RoomProxy = World->SpawnActor<AActor>( RoomProxyClass, RoomTransform, SpawnParams );
+			RoomProxy->SetActorScale3D(RoomScale);
 		}
 	}
 
