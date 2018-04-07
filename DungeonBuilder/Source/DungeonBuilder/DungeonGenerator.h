@@ -46,6 +46,10 @@ public:
 
 	/* The radius of the circle the rooms will initially be spawned */
 	UPROPERTY(EditAnywhere, Category = "Dungeon Generator")
+	TSubclassOf<AActor> RoomProxyClass;
+
+	/* The radius of the circle the rooms will initially be spawned */
+	UPROPERTY(EditAnywhere, Category = "Dungeon Generator")
 	float GeneratorCircleRadius = 100.f;
 
 	/* The Number of rooms to be generated*/
@@ -81,6 +85,7 @@ private:
 	float RoundFloatToGrid( float InRawFloat, float GridSize );
 	FVector2D RoundCoordinatesToGrid( FVector2D InRawCoord, float GridSize );
 	void CalculateMeanWidthAndLength(TArray<FRoom> const& ArrayOfRooms, float& OutWidthMean, float& OutLengthMean);
+	void SpawnRooms();
 
 private:
 	TArray<FRoom> ArrayOfRandomRooms;

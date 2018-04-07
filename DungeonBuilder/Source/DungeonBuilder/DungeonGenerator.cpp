@@ -36,6 +36,8 @@ void ADungeonGenerator::BeginPlay()
 		ArrayOfRandomRooms.Add(RandomRoom);
 	}
 
+	SpawnRooms();
+
 	//// Test Only : Spawn shapes to 
 #if !UE_BUILD_SHIPPING
 	DrawDebugCircle(GetWorld(), FVector::ZeroVector, GeneratorCircleRadius, 50, FColor::Red, true,-1,0,4,FVector(1,0,0),FVector(0,1,0),false);
@@ -93,5 +95,24 @@ void ADungeonGenerator::CalculateMeanWidthAndLength(TArray<FRoom> const& ArrayOf
 
 	OutWidthMean = WidthMean / ArrayOfRooms.Num();
 	OutLengthMean = LengthMean / ArrayOfRooms.Num();
+}
+
+void ADungeonGenerator::SpawnRooms()
+{
+	if (RoomProxyClass != nullptr)
+	{
+		for ( FRoom RoomDescription : ArrayOfRandomRooms )
+		{
+			UWorld* World = GetWorld();
+			FVector RoomLocation = FVector(RoomDescription.Coordinates.X, RoomDescription.Coordinates.Y, 0);
+			FRotator RoomRotation = FRotator::ZeroRotator;
+			FVector RoomScale = FVector( RoomDescription.RoomWidth, RoomDescription.RoomLength,1);
+			FTransform RoomTransform = FTransform(RoomRotation, RoomLocation, RoomScale);
+			FActorSpawnParameters SpawnParams = FActorSpawnParameters();
+
+			AActor* RoomProxy = World->SpawnActor<AActor>( RoomProxyClass, RoomTransform, SpawnParams );
+		}
+	}
+
 }
 
