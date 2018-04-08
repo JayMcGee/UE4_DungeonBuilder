@@ -75,7 +75,7 @@ void ADungeonRoomProxy::SetRoomFromFRoom(const FRoom& RoomData)
 	{
 		const FVector RoomLocation = FVector(RoomData.Coordinates, 0.f);
 		const FRotator RoomRotation = FRotator::ZeroRotator;
-		const FVector RoomScale = FVector(RoomData.RoomWidth / 50.f, RoomData.RoomLength / 50.f, 1.f);
+		const FVector RoomScale = FVector(RoomData.RoomWidth / 100.f, RoomData.RoomLength / 100.f, 1.f);
 
 		const FTransform RoomTransform = FTransform(RoomRotation, RoomLocation, RoomScale);
 		

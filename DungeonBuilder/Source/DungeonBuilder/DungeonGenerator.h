@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
+#include "DungeonBuilderUtils.h"
 #include "DungeonBuilder/DungeonRoomProxy.h"
 
 #include "DungeonGenerator.generated.h"
@@ -37,6 +38,10 @@ public:
 	/* The Number of rooms to be generated*/
 	UPROPERTY(EditAnywhere, Category = "Dungeon Generator")
 	float NumberOfRooms = 10.f;
+
+	/* The Number of rooms to be considered Main hubs ( Not corridors ) */
+	UPROPERTY(EditAnywhere, Category = "Dungeon Generator")
+	float NumberOfMainRooms = 4.f;
 	
 	/* The Minimum Width of a room */
 	UPROPERTY(EditAnywhere, Category = "Dungeon Generator")
@@ -69,8 +74,8 @@ private:
 	//------------------------ Utils
 	float RoundFloatToGrid( float InRawFloat, float GridSize );
 	FVector2D RoundCoordinatesToGrid( FVector2D InRawCoord, float GridSize );
-	void CalculateMeanWidthAndLength(TArray<FRoom> const& ArrayOfRooms, float& OutWidthMean, float& OutLengthMean);
-	void SpawnRooms();
+	void AssigMainRooms();
+	void SpawnRoomsProxies();
 
 private:
 	TArray<FRoom> ArrayOfRandomRooms;

@@ -6,28 +6,11 @@
 #include "GameFramework/Actor.h"
 #include <Components/StaticMeshComponent.h>
 
+#include "DungeonBuilderUtils.h"
+
 #include "DungeonRoomProxy.generated.h"
 
-USTRUCT()
-struct FRoom
-{
-	GENERATED_BODY()
 
-		UPROPERTY()
-		FGuid RoomId;
-
-	UPROPERTY()
-		FVector2D Coordinates = FVector2D::ZeroVector;
-
-	UPROPERTY()
-		float RoomLength = 0.f;
-
-	UPROPERTY()
-		float RoomWidth = 0.f;
-
-	UPROPERTY()
-		bool bIsMain = false;
-};
 
 UCLASS()
 class DUNGEONBUILDER_API ADungeonRoomProxy : public AActor
