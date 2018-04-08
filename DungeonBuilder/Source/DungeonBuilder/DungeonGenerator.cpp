@@ -2,6 +2,7 @@
 
 #include "DungeonGenerator.h"
 #include "DrawDebugHelpers.h"
+#include "DungeonRoomProxy.h"
 
 namespace DungeonGeneratorConstant
 {
@@ -57,6 +58,11 @@ void ADungeonGenerator::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 }
 
+void ADungeonGenerator::EnableRoomResolve()
+{
+
+}
+
 FVector2D ADungeonGenerator::GetRandomPointInCircle()
 {
 	const float RandomRadius = 2 * DungeonGeneratorConstant::Pi * FMath::FRandRange(0, 1);
@@ -102,19 +108,14 @@ void ADungeonGenerator::SpawnRooms()
 {
 	if (RoomProxyClass != nullptr)
 	{
+		UWorld* World = GetWorld();
+		
 		for ( FRoom RoomDescription : ArrayOfRandomRooms )
 		{
-			UWorld* World = GetWorld();
-			FVector RoomLocation = FVector(RoomDescription.Coordinates.X, RoomDescription.Coordinates.Y, 0);
-			FRotator RoomRotation = FRotator::ZeroRotator;
-
-			FVector RoomScale = FVector( RoomDescription.RoomWidth / 100.f, RoomDescription.RoomLength / 100.f, 1);
-
-			FTransform RoomTransform = FTransform(RoomRotation, RoomLocation, RoomScale);
-			FActorSpawnParameters SpawnParams = FActorSpawnParameters();
-
-			AActor* RoomProxy = World->SpawnActor<AActor>( RoomProxyClass, RoomTransform, SpawnParams );
-			RoomProxy->SetActorScale3D(RoomScale);
+			ADungeonRoomProxy* RoomProxy = World->SpawnActor<ADungeonRoomProxy>( RoomProxyClass );
+			
+			
+			RoomProxy->SetRoomFromFRoom(RoomDescription);
 		}
 	}
 

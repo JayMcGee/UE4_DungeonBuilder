@@ -4,28 +4,10 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
+#include "DungeonBuilder/DungeonRoomProxy.h"
+
 #include "DungeonGenerator.generated.h"
 
-USTRUCT()
-struct FRoom 
-{
-	GENERATED_BODY()
-	
-	UPROPERTY()
-	FGuid RoomId;
-
-	UPROPERTY()
-	FVector2D Coordinates = FVector2D::ZeroVector;
-
-	UPROPERTY()
-	float RoomLength = 0.f;
-
-	UPROPERTY()
-	float RoomWidth = 0.f;
-
-	UPROPERTY()
-	bool bIsMain = false;
-};
 
 UCLASS()
 class DUNGEONBUILDER_API ADungeonGenerator : public AActor
@@ -46,7 +28,7 @@ public:
 
 	/* The radius of the circle the rooms will initially be spawned */
 	UPROPERTY(EditAnywhere, Category = "Dungeon Generator")
-	TSubclassOf<AActor> RoomProxyClass;
+	TSubclassOf<ADungeonRoomProxy> RoomProxyClass;
 
 	/* The radius of the circle the rooms will initially be spawned */
 	UPROPERTY(EditAnywhere, Category = "Dungeon Generator")
@@ -76,6 +58,9 @@ public:
 	UPROPERTY(EditAnywhere, Category = "Dungeon Generator")
 	float GeneratorGridSize = 0.5f;
 
+
+	UFUNCTION(BlueprintCallable)
+		void EnableRoomResolve();
 
 private:
 
