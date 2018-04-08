@@ -8,7 +8,8 @@ namespace DungeonGeneratorConstant
 	static int32 GDebugGenerator = 0;
 	FAutoConsoleVariableRef CVarDungeonGeneratorVisualization(TEXT("DGen.DrawDebug"), GDebugGenerator, TEXT(" 0 = Disable, 1 = Enable"));
 
-	static const float Pi = 3.1415;
+	static const float Pi = 3.1415f;
+	static const float OneMeter = 100.f;
 }
 
 
@@ -24,6 +25,7 @@ void ADungeonGenerator::BeginPlay()
 {
 	Super::BeginPlay();
 
+	// Build Array of Random rooms
 	for (int32 idx = 0; idx < NumberOfRooms; idx++)
 	{
 		FRoom RandomRoom;
@@ -32,23 +34,28 @@ void ADungeonGenerator::BeginPlay()
 		RandomRoom.Coordinates = GetRandomPointInCircle();;
 		RandomRoom.RoomWidth = RoundFloatToGrid(FMath::FRandRange(MinimumRoomWidth, MaximumRoomWidth), GeneratorGridSize);
 		RandomRoom.RoomLength = RoundFloatToGrid(FMath::FRandRange(MinimumRoomLength, MaximumRoomLength), GeneratorGridSize);
+		RandomRoom.RoomArea = RandomRoom.RoomWidth * RandomRoom.RoomLength;
 
 		ArrayOfRandomRooms.Add(RandomRoom);
 	}
 
-	SpawnRooms();
+	// Post-Process Rooms
+	AssigMainRooms();
+
+	// Spawn Rooms proxy
+	SpawnRoomsProxies();
 
 	//// Test Only : Spawn shapes to 
-#if !UE_BUILD_SHIPPING
+	#if !UE_BUILD_SHIPPING
 	DrawDebugCircle(GetWorld(), FVector::ZeroVector, GeneratorCircleRadius, 50, FColor::Red, true,-1,0,4,FVector(1,0,0),FVector(0,1,0),false);
 	for (FRoom Room : ArrayOfRandomRooms)
 	{
-		DrawDebugPoint(GetWorld(), FVector(Room.Coordinates.X, Room.Coordinates.Y, 0), 5.f, FColor::Green, true);
 		// Building debug box by extent ( Diagonal from center to corner ) 
 		FBox DebugBox = FBox::BuildAABB(FVector(Room.Coordinates.X, Room.Coordinates.Y, 0), FVector(Room.RoomWidth /2, Room.RoomLength /2, 0));
-		DrawDebugSolidBox(GetWorld(), DebugBox, FColor::Green, FTransform::Identity, true);
+		FColor DebugColor = Room.bIsMain ? FColor::Red : FColor::Green;
+		DrawDebugSolidBox(GetWorld(), DebugBox, DebugColor, FTransform::Identity, true);
 	}
-#endif
+	#endif
 }
 
 // Called every frame
@@ -59,6 +66,7 @@ void ADungeonGenerator::Tick(float DeltaTime)
 
 FVector2D ADungeonGenerator::GetRandomPointInCircle()
 {
+	/** As seen on StackOverflow : https://stackoverflow.com/questions/5837572/generate-a-random-point-within-a-circle-uniformly */
 	const float RandomRadius = 2 * DungeonGeneratorConstant::Pi * FMath::FRandRange(0, 1);
 	const float RandomNumber = FMath::FRandRange(0, 1) + FMath::FRandRange(0, 1);	
 	const float RandomInverseNumber = RandomNumber > 1 ? 2 - RandomNumber : RandomNumber;
@@ -83,40 +91,49 @@ FVector2D ADungeonGenerator::RoundCoordinatesToGrid(FVector2D InRawCoord, float 
 	return GridAlignedCoord;
 }
 
-void ADungeonGenerator::CalculateMeanWidthAndLength(TArray<FRoom> const& ArrayOfRooms, float& OutWidthMean, float& OutLengthMean)
+void ADungeonGenerator::AssigMainRooms()
 {
-	float WidthMean = 0;
-	float LengthMean = 0;
-
-	for (FRoom Room : ArrayOfRooms)
+	if (NumberOfMainRooms > NumberOfRooms)
 	{
-		WidthMean += Room.RoomWidth;
-		LengthMean += Room.RoomLength;
+		UE_LOG(LogTemp, Warning, TEXT("Number Of MainRooms is Higher than number of rooms -- All rooms will be MainHubs"))
+		NumberOfMainRooms = NumberOfRooms;
 	}
 
-	OutWidthMean = WidthMean / ArrayOfRooms.Num();
-	OutLengthMean = LengthMean / ArrayOfRooms.Num();
+	ArrayOfRandomRooms.Sort([](const FRoom& LHS, const FRoom& RHS) { return LHS.RoomArea > RHS.RoomArea; });
+
+	for (int32 idx = 0; idx < NumberOfMainRooms; idx++)
+	{
+		ArrayOfRandomRooms[idx].bIsMain = true;
+	}
 }
 
-void ADungeonGenerator::SpawnRooms()
+void ADungeonGenerator::SpawnRoomsProxies()
 {
 	if (RoomProxyClass != nullptr)
 	{
 		for ( FRoom RoomDescription : ArrayOfRandomRooms )
 		{
-			UWorld* World = GetWorld();
+			// Calculate Room Transform 
 			FVector RoomLocation = FVector(RoomDescription.Coordinates.X, RoomDescription.Coordinates.Y, 0);
 			FRotator RoomRotation = FRotator::ZeroRotator;
-
-			FVector RoomScale = FVector( RoomDescription.RoomWidth / 100.f, RoomDescription.RoomLength / 100.f, 1);
-
+			FVector RoomScale = FVector( RoomDescription.RoomWidth / DungeonGeneratorConstant::OneMeter, RoomDescription.RoomLength / DungeonGeneratorConstant::OneMeter, 1);
 			FTransform RoomTransform = FTransform(RoomRotation, RoomLocation, RoomScale);
-			FActorSpawnParameters SpawnParams = FActorSpawnParameters();
 
-			AActor* RoomProxy = World->SpawnActor<AActor>( RoomProxyClass, RoomTransform, SpawnParams );
-			RoomProxy->SetActorScale3D(RoomScale);
+			// Set Spawn Parameters
+			FActorSpawnParameters SpawnParams = FActorSpawnParameters();
+			SpawnParams.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButAlwaysSpawn;
+
+			// Spawn RoomProxy and Scale it to desired size
+			AActor* RoomProxy = GetWorld()->SpawnActor<AActor>( RoomProxyClass, RoomTransform, SpawnParams );
+			if ( RoomProxy) // Room might fail to spawn
+			{
+				RoomProxy->SetActorScale3D(RoomScale);
+			}
 		}
 	}
-
+	else
+	{
+		UE_LOG(LogTemp, Warning, TEXT("Missing Room Proxy class"))
+	}
 }
 
