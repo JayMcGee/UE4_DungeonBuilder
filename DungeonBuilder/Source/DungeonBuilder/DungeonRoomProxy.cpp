@@ -14,13 +14,14 @@ ADungeonRoomProxy::ADungeonRoomProxy()
 	// Collision handling parameters
 	RoomCollisionMeshComp->SetLinearDamping(100.f);
 
-	RoomCollisionMeshComp->SetConstraintMode(EDOFMode::Default);
 	RoomCollisionMeshComp->GetBodyInstance()->bLockZTranslation = true;
-	RoomCollisionMeshComp->GetBodyInstance()->bLockXRotation = true;
-	RoomCollisionMeshComp->GetBodyInstance()->bLockYRotation = true;
-	RoomCollisionMeshComp->GetBodyInstance()->bLockZRotation = true;
+	RoomCollisionMeshComp->GetBodyInstance()->bLockRotation = true;
+	RoomCollisionMeshComp->SetConstraintMode(EDOFMode::Default);
+	RoomCollisionMeshComp->SetEnableGravity(false);
 
 	RoomCollisionMeshComp->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+
+	RoomCollisionMeshComp->OnComponentHit.AddDynamic(this, &ADungeonRoomProxy::OnRoomHit);
 
 	RoomCollisionMeshComp->bGenerateOverlapEvents = false;
 }
@@ -65,6 +66,11 @@ void ADungeonRoomProxy::SetRoomPositionResolveEnabled(bool bEnable)
 			// Unregsiter from callbacks
 		}
 	}
+}
+
+void ADungeonRoomProxy::OnRoomHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit)
+{
+	UE_LOG(LogTemp, Log, TEXT("Some collision occured between %s and %s"), *GetFName().ToString(), *OtherActor->GetFName().ToString());
 }
 
 void ADungeonRoomProxy::SetRoomFromFRoom(const FRoom& RoomData)

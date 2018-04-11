@@ -30,11 +30,14 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 	
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(VisibleAnywhere)
 	UStaticMeshComponent* RoomCollisionMeshComp;
 
 	UFUNCTION(BlueprintCallable)
 		void SetRoomPositionResolveEnabled(bool bEnable);
+
+	UFUNCTION()
+	void OnRoomHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit);
 
 	void SetRoomFromFRoom(const FRoom& RoomData);
 };
