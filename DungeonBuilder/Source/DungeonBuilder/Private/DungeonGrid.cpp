@@ -23,17 +23,26 @@ void ADungeonGrid::BeginPlay()
 		float const NewBlockY = (idx / GridSize) * GridBlockSize - GridExtent;
 
 		FGridBlock NewGridBlock;
-		NewGridBlock.GridBlockWorldCoordinates = FVector2D( NewBlockX, NewBlockY);
-
-		// -- Debug grid
-		FVector const DebugPosition = FVector(NewBlockX, NewBlockY, 0.f);
-		DrawDebugPoint(GetWorld(), DebugPosition, 2.f, FColor::Purple, true);		
-		FBox DebugBox = FBox::BuildAABB(DebugPosition, FVector(GridBlockSize / 2, GridBlockSize / 2, 0));
-		DrawDebugBox(GetWorld(), DebugBox.GetCenter(), DebugBox.GetExtent(), FQuat::Identity, FColor::Purple, true, -1.f, 0, 1);
-		// -- End Debug
-
+		NewGridBlock.GridBlockWorldCoordinates = FVector2D( NewBlockX, NewBlockY);				
 		GridBlocks.Add(NewGridBlock);
 	}
+
+	if (bDrawDebugGrid )
+	{
+		DrawDebugGrid();
+	}
 	
+}
+
+void ADungeonGrid::DrawDebugGrid()
+{
+	for (FGridBlock GridBlock : GridBlocks)
+	{
+		FColor LocalDebugColor = GridBlock.bIsOccupied ? FColor::Red : DebugColor;
+		FVector const DebugPosition = FVector(GridBlock.GridBlockWorldCoordinates.X, GridBlock.GridBlockWorldCoordinates.Y, 0.f);
+		DrawDebugPoint(GetWorld(), DebugPosition, 2.f, FColor::Purple, true);
+		FBox DebugBox = FBox::BuildAABB(DebugPosition, FVector(GridBlockSize / 2, GridBlockSize / 2, 0));
+		DrawDebugBox(GetWorld(), DebugBox.GetCenter(), DebugBox.GetExtent(), FQuat::Identity, LocalDebugColor, true, -1.f, 0, 1);
+	}
 }
 

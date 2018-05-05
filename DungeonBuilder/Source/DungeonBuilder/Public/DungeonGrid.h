@@ -19,6 +19,13 @@ struct FGridBlock
 
 	UPROPERTY()
 	FVector2D GridBlockWorldCoordinates = FVector2D::ZeroVector;
+
+	UPROPERTY()
+	bool bIsOccupied = false;
+
+	UPROPERTY()
+	TSubclassOf<AActor> OccupyingActor = nullptr;
+	
 };
 
 UCLASS()
@@ -33,8 +40,18 @@ public:
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
+	void DrawDebugGrid();
 
 public:	
+
+	//---------------------- Debug
+	UPROPERTY(EditAnywhere, Category = "Debug")
+	bool bDrawDebugGrid = true;
+
+	UPROPERTY(EditAnywhere, Category = "Debug")
+	FColor DebugColor = FColor::Purple;
+	//---------------------- End Debug
+
 	UPROPERTY(EditAnywhere, Category = "Grid")
 	int32 GridSize = 20;
 
